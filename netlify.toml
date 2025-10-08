@@ -1,0 +1,23 @@
+# Netlify configuration file
+[build]
+  # Base directory: where the build command is run
+  # Leave this empty if your build command is run in the root directory
+  base = ""
+  
+  # Build command: the command that builds your site
+  command = "npm run build"
+  
+  # Publish directory: the directory that contains the built site
+  publish = "dist"
+  
+  # Functions directory: where your serverless functions are stored
+  functions = "netlify/functions"
+
+# Define redirects and headers
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Environment variables are managed in the Netlify UI
+# DO NOT add sensitive information here

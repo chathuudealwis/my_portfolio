@@ -12,6 +12,42 @@
  */
 
 async function sendEmail({ name, email, message }) {
+  // Check if we're running in production (Netlify) by checking the hostname
+  const isProduction = 
+    typeof window !== 'undefined' && 
+    (window.location.hostname !== 'localhost' && 
+     window.location.hostname !== '127.0.0.1');
+
+  // If in production, use the Netlify function
+  if (isProduction) {
+    try {
+      const res = await fetch('/.netlify/functions/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      if (!res.ok) {
+        let errorText;
+        try {
+          const errorData = await res.json();
+          errorText = errorData.error || res.statusText || 'Unknown error';
+        } catch (e) {
+          errorText = res.statusText || 'Unknown error';
+        }
+        throw new Error(`Failed to send email: ${errorText}`);
+      }
+
+      return true;
+    } catch (error) {
+      console.error('Error sending email via serverless function:', error);
+      throw error;
+    }
+  }
+
+  // Otherwise use the client-side approach for local development
   const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
   const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
   const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
