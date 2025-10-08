@@ -1,5 +1,6 @@
 import { Github, Linkedin, Mail, Download, Code2, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
+import myPhoto from '../uploads/my photo.jpg';
 
 export default function Hero() {
   return (
@@ -35,13 +36,17 @@ export default function Hero() {
           transition={{ duration: 0.8, type: "spring", bounce: 0.5 }}
           className="mb-8"
         >
-          <div className="w-36 h-36 mx-auto mb-6 rounded-full bg-gradient-to-br from-blue-600 via-blue-500 to-cyan-400 flex items-center justify-center text-white text-5xl font-bold shadow-2xl glow-blue-strong relative">
+          <div className="w-36 h-36 mx-auto mb-6 rounded-full bg-gradient-to-br from-blue-600 via-blue-500 to-cyan-400 flex items-center justify-center text-white shadow-2xl glow-blue-strong relative overflow-hidden">
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
               className="absolute inset-0 rounded-full border-4 border-dashed border-blue-300 opacity-30"
             />
-            <span className="relative z-10">CD</span>
+            <img 
+              src={myPhoto} 
+              alt="Chanidu Sri Chathupa" 
+              className="w-full h-full object-cover relative z-10"
+            />
           </div>
         </motion.div>
 

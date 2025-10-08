@@ -2,6 +2,7 @@ import { ExternalLink, Github } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
+import myPhoto from '../uploads/project_photo.png';
 
 export default function Projects() {
   const ref = useRef(null);
@@ -9,53 +10,14 @@ export default function Projects() {
 
   const projects = [
     {
-      title: 'E-Commerce Platform',
-      description: 'A full-stack e-commerce solution with payment integration, inventory management, and real-time analytics.',
-      image: 'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800',
+      title: 'Aquarium Management System',
+      description: 'A full-stack aquarium management solution with payment integration, inventory management, and real-time analytics.',
+      image: myPhoto,
       tags: ['React', 'Node.js', 'PostgreSQL', 'Stripe'],
-      github: 'https://github.com',
-      live: 'https://example.com',
-    },
-    {
-      title: 'Task Management App',
-      description: 'Collaborative project management tool with real-time updates, team collaboration, and progress tracking.',
-      image: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800',
-      tags: ['TypeScript', 'React', 'Supabase', 'Tailwind'],
-      github: 'https://github.com',
-      live: 'https://example.com',
-    },
-    {
-      title: 'Social Media Dashboard',
-      description: 'Analytics dashboard for social media metrics with beautiful data visualizations and automated reporting.',
-      image: 'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800',
-      tags: ['Next.js', 'Chart.js', 'REST API', 'MongoDB'],
-      github: 'https://github.com',
-      live: 'https://example.com',
-    },
-    {
-      title: 'Weather Forecast App',
-      description: 'Real-time weather application with location-based forecasts, interactive maps, and severe weather alerts.',
-      image: 'https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg?auto=compress&cs=tinysrgb&w=800',
-      tags: ['React', 'OpenWeather API', 'Geolocation', 'PWA'],
-      github: 'https://github.com',
-      live: 'https://example.com',
-    },
-    {
-      title: 'Fitness Tracking App',
-      description: 'Personal fitness tracker with workout logging, progress charts, and personalized recommendations.',
-      image: 'https://images.pexels.com/photos/416778/pexels-photo-416778.jpeg?auto=compress&cs=tinysrgb&w=800',
-      tags: ['Vue.js', 'Firebase', 'Chart.js', 'PWA'],
-      github: 'https://github.com',
-      live: 'https://example.com',
-    },
-    {
-      title: 'Blog Platform',
-      description: 'Modern blogging platform with markdown support, SEO optimization, and content management system.',
-      image: 'https://images.pexels.com/photos/261662/pexels-photo-261662.jpeg?auto=compress&cs=tinysrgb&w=800',
-      tags: ['Next.js', 'MDX', 'Vercel', 'CMS'],
-      github: 'https://github.com',
-      live: 'https://example.com',
-    },
+      github: 'https://github.com/chathuudealwis/ceylonAquapulse',
+      
+    }
+    
   ];
 
   return (
@@ -134,16 +96,7 @@ export default function Projects() {
                     <Github className="w-4 h-4" />
                     <span className="text-sm font-medium">Code</span>
                   </motion.a>
-                  <motion.a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.05, x: 5 }}
-                    className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    <span className="text-sm font-medium">Live Demo</span>
-                  </motion.a>
+                  
                 </div>
               </div>
             </motion.div>

@@ -52,9 +52,9 @@ export default function Footer() {
             <h4 className="font-semibold mb-4 text-blue-400">Connect</h4>
             <div className="flex gap-4">
               {[
-                { icon: Github, href: 'https://github.com', label: 'GitHub' },
+                { icon: Github, href: 'https://github.com/chathuudealwis', label: 'GitHub' },
                 { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
-                { icon: Mail, href: 'mailto:chanidu@example.com', label: 'Email' },
+                { icon: Mail, href: 'mailto:chathupachanidu2000@gmail.com', label: 'Email' },
               ].map((social) => (
                 <motion.a
                   key={social.label}
@@ -81,14 +81,8 @@ export default function Footer() {
           className="pt-8 border-t border-slate-800 text-center"
         >
           <p className="text-slate-400 flex items-center justify-center gap-2">
-            Made with{' '}
-            <motion.span
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 1, repeat: Infinity }}
-            >
-              <Heart className="w-4 h-4 text-red-500 fill-current" />
-            </motion.span>{' '}
-            by Chanidu Sri Chathupa De Alwis
+           
+            Made by Chanidu Sri Chathupa De Alwis
             <span className="mx-2">|</span>
             {currentYear}
           </p>

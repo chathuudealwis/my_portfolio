@@ -1,5 +1,6 @@
 import { Mail, MapPin, Phone, Send } from 'lucide-react';
 import { useState } from 'react';
+import sendEmail from '../email.ts';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
@@ -14,12 +15,26 @@ export default function Contact() {
     message: '',
   });
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [sending, setSending] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus('success');
-    setFormData({ name: '', email: '', message: '' });
-    setTimeout(() => setStatus('idle'), 3000);
+    setSending(true);
+    setErrorMessage(null);
+    try {
+      await sendEmail({ name: formData.name, email: formData.email, message: formData.message });
+      setStatus('success');
+      setFormData({ name: '', email: '', message: '' });
+      setTimeout(() => setStatus('idle'), 3000);
+    } catch (err: any) {
+      console.error('sendEmail error', err);
+      setStatus('error');
+      setErrorMessage(err?.message || 'Failed to send message.');
+      setTimeout(() => setStatus('idle'), 5000);
+    } finally {
+      setSending(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -65,9 +80,9 @@ export default function Contact() {
 
             <div className="space-y-6">
               {[
-                { icon: Mail, title: 'Email', value: 'chanidu@example.com', href: 'mailto:chanidu@example.com' },
-                { icon: Phone, title: 'Phone', value: '+94 (77) 123-4567', href: 'tel:+94771234567' },
-                { icon: MapPin, title: 'Location', value: 'Colombo, Sri Lanka', href: null },
+                { icon: Mail, title: 'Email', value: 'chathupachanidu2000@gmail.com', href: 'mailto:chathupachanidu2000@gmail.com' },
+                { icon: Phone, title: 'Phone', value: '+94 (76) 0195368', href: 'tel:+94760195368' },
+                { icon: MapPin, title: 'Location', value: 'sooriyawewa, Sri Lanka', href: null },
               ].map((item, index) => (
                 <motion.div
                   key={index}
@@ -170,6 +185,7 @@ export default function Contact() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className="w-full px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-lg font-medium shadow-lg glow-blue flex items-center justify-center gap-2 group"
+                disabled={sending}
               >
                 <span>Send Message</span>
                 <motion.div
@@ -187,6 +203,15 @@ export default function Contact() {
                   className="p-4 bg-green-900/30 border border-green-500/50 text-green-300 rounded-lg"
                 >
                   Message sent successfully! I'll get back to you soon.
+                </motion.div>
+              )}
+              {status === 'error' && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-4 bg-red-900/30 border border-red-500/50 text-red-300 rounded-lg"
+                >
+                  {errorMessage || 'Failed to send message. Please try again later.'}
                 </motion.div>
               )}
             </form>
